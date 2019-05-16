@@ -4,11 +4,20 @@ const evx = create()
 
 export const on = evx.on
 export const emit = evx.emit
+export const hydrate = evx.hydrate
+export const getState = evx.getState
 
 export function create (state = {}) {
   const events = {}
 
   return {
+    getState () {
+      return state
+    },
+    hydrate (s) {
+      if (!isObj(s)) throw 'please provide hydrate with an object'
+      return Object.assign({}, state, s)
+    },
     on (evs, fn) {
       evs = [].concat(evs)
       evs.map(ev => events[ev] = (events[ev] || []).concat(fn))
