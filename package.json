@@ -1,0 +1,33 @@
+{
+  "name": "evx",
+  "version": "0.0.1",
+  "description": "",
+  "source": "index.js",
+  "module": "dist/evx.es.js",
+  "main": "dist/evx.js",
+  "umd:main": "dist/evx.umd.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle build",
+    "watch": "microbundle watch --compress false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/estrattonbailey/evx.git"
+  },
+  "author": "estrattonbailey",
+  "keywords": [
+    "keystroke",
+    "key watch"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/estrattonbailey/evx/issues"
+  },
+  "homepage": "https://github.com/estrattonbailey/evx#readme",
+  "devDependencies": {
+    "microbundle": "^0.9.0"
+  }
+}
