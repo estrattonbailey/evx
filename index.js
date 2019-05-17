@@ -7,18 +7,16 @@ export const emit = evx.emit
 export const hydrate = evx.hydrate
 export const getState = evx.getState
 
-export function create (initialState = {}) {
+export function create (state = {}) {
   const events = {}
-
-  let state = initialState;
 
   return {
     getState () {
-      return state
+      return Object.assign({}, state)
     },
     hydrate (s) {
       if (!isObj(s)) throw 'please provide hydrate with an object'
-      state = Object.assign({}, state, s)
+      Object.assign(state, s)
     },
     on (evs, fn) {
       evs = [].concat(evs)
@@ -31,8 +29,7 @@ export function create (initialState = {}) {
       data = typeof data === 'function' ? data(state) : data
 
       if (data) {
-        state = Object.assign(
-          {},
+        Object.assign(
           state,
           isObj(data) ? data : { [ev]: data }
         )
