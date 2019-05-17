@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "microbundle build",
-    "watch": "microbundle watch --compress false"
+    "watch": "microbundle watch --compress false",
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/estrattonbailey/evx#readme",
   "devDependencies": {
+    "ava": "^1.4.1",
     "microbundle": "^0.9.0"
   }
 }
