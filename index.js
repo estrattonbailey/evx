@@ -17,6 +17,7 @@ export function create (state = {}) {
     hydrate (s) {
       if (!isObj(s)) throw 'please provide hydrate with an object'
       Object.assign(state, s)
+      return () => (events['*'] || []).map(fn => fn(state))
     },
     on (evs, fn) {
       evs = [].concat(evs)

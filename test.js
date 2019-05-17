@@ -58,3 +58,9 @@ test('destroy', t => {
   emit('b')
   if (foo) t.pass()
 })
+test('hydrate emit wildcard', t => {
+  on('*', state => t.pass())
+  const fire = hydrate({ hydrate: true })
+  t.is(getState().hydrate, true)
+  fire()
+})

@@ -58,6 +58,12 @@ import { hydrate } from 'evx'
 hydrate({ baz: true })
 ```
 
+But for convenience, `hydrate` also returns a function that, when called, will
+emit a '*' event:
+```javascript
+hydrate({ baz: true })()
+```
+
 The current read-only state is accessible as well:
 ```javascript
 import { hydrate, getState } from 'evx'
