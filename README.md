@@ -46,7 +46,7 @@ property *key* as the event name:
 on('someProperty', state => {}) // someProperty updated
 
 emit('foo', { someProperty: true }) // will fire
-hydrate({ someProperty: true }) // will also fire
+hydrate({ someProperty: true })() // will also fire
 ```
 
 ### State
