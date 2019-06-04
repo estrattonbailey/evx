@@ -64,3 +64,16 @@ test('hydrate emit wildcard', t => {
   t.is(getState().hydrate, true)
   fire()
 })
+test('test key-named events with emit', t => {
+  t.plan(2)
+  on('foo', state => t.pass()) // should fire only once
+  on('bar', state => t.pass())
+  emit('foo', { foo: true, bar: true })
+})
+test('test key-named events with hydrate', t => {
+  t.plan(2)
+  on('foo', state => t.pass())
+  on('bar', state => t.pass())
+  on('baz', state => t.pass()) // won't get called
+  hydrate({ foo: true, bar: true })()
+})
