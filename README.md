@@ -1,5 +1,5 @@
 # evx
-Handy dandy persistent-state pub/sub with multi & wildcard subscriptions. **400
+Handy dandy persistent-state pub/sub with multi, wildcard, and single-property subscriptions. **400
 bytes gzipped.**
 
 ## Install 
