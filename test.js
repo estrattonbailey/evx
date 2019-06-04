@@ -46,10 +46,6 @@ test('immutable state', t => {
   _s.bar = 'hello' // won't mutate
   t.is(evx.getState().bar, null)
 })
-test('emit non-object', t => {
-  on('primitive', state => t.is(state.primitive, 'hello'))
-  emit('primitive', 'hello')
-})
 test('destroy', t => {
   let foo = false
   const d = on('*', () => foo = !foo)
@@ -76,4 +72,25 @@ test('test key-named events with hydrate', t => {
   on('bar', state => t.pass())
   on('baz', state => t.pass()) // won't get called
   hydrate({ foo: true, bar: true })()
+})
+test('state should be object', t => {
+  t.plan(2)
+
+  try {
+    hydrate('foo')()
+  } catch (e) {
+    t.pass()
+  }
+
+  try {
+    emit('*', 'foo')
+  } catch (e) {
+    t.pass()
+  }
+})
+test('emit array of events', t => {
+  t.plan(2)
+  on('foo', state => t.pass())
+  on('bar', state => t.pass())
+  emit([ 'foo', 'bar' ])
 })

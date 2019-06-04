@@ -1,5 +1,9 @@
 const isObj = v => typeof v === 'object' && !Array.isArray(v)
 
+const validate = o => {
+  if (!isObj(o)) throw 'state should be an object'
+}
+
 const uniq = arr => arr.reduce((a, b, i) => {
   if (a.indexOf(b) > -1) return a
   return a.concat(b)
@@ -24,7 +28,7 @@ export function create (state = {}) {
       return Object.assign({}, state)
     },
     hydrate (s) {
-      if (!isObj(s)) throw 'please provide hydrate with an object'
+      validate(s)
 
       Object.assign(state, s)
 
@@ -46,11 +50,8 @@ export function create (state = {}) {
       data = typeof data === 'function' ? data(state) : data
 
       if (data) {
-        Object.assign(
-          state,
-          isObj(data) ? data : { [ev]: data }
-        )
-
+        validate(data)
+        Object.assign(state, data)
         evs = evs.concat(Object.keys(data))
       }
 
