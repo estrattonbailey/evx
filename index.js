@@ -44,18 +44,18 @@ export function create (state = {}) {
         ev => events[ev].splice(events[ev].indexOf(fn), 1)
       )
     },
-    emit (ev, data) {
+    emit (ev, data, merge = true) {
       let evs = (ev === '*' ? [] : ['*']).concat(ev)
 
       data = typeof data === 'function' ? data(state) : data
 
       if (data) {
         validate(data)
-        Object.assign(state, data)
+        merge && Object.assign(state, data)
         evs = evs.concat(Object.keys(data))
       }
 
-      fire(evs, events, state)
+      fire(evs, events, merge ? state : data)
     }
   }
 }

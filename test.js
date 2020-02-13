@@ -94,3 +94,12 @@ test('emit array of events', t => {
   on('bar', state => t.pass())
   emit([ 'foo', 'bar' ])
 })
+test('emit without merge', t => {
+  t.plan(2)
+  on('pubsub', data => {
+    t.true(getState().foo)
+    t.false(data.foo)
+  })
+  hydrate({ foo: true })()
+  emit('pubsub', { foo: false }, false)
+})
