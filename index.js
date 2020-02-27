@@ -9,9 +9,9 @@ const uniq = arr => arr.reduce((a, b, i) => {
   return a.concat(b)
 }, [])
 
-const fire = (evs, events, state) => uniq(evs)
+const fire = (evs, events, state, transient) => uniq(evs)
   .reduce((fns, ev) => fns.concat(events[ev] || []), [])
-  .map(fn => fn(state))
+  .map(fn => fn(state, transient))
 
 const evx = create()
 
@@ -44,18 +44,18 @@ export function create (state = {}) {
         ev => events[ev].splice(events[ev].indexOf(fn), 1)
       )
     },
-    emit (ev, data, merge = true) {
+    emit (ev, data, transient) {
       let evs = (ev === '*' ? [] : ['*']).concat(ev)
 
       data = typeof data === 'function' ? data(state) : data
 
       if (data) {
         validate(data)
-        merge && Object.assign(state, data)
+        Object.assign(state, data)
         evs = evs.concat(Object.keys(data))
       }
 
-      fire(evs, events, merge ? state : data)
+      fire(evs, events, state, transient)
     }
   }
 }

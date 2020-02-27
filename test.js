@@ -94,12 +94,12 @@ test('emit array of events', t => {
   on('bar', state => t.pass())
   emit([ 'foo', 'bar' ])
 })
-test('emit without merge', t => {
+test('emit transient data', t => {
   t.plan(2)
-  on('pubsub', data => {
-    t.true(getState().foo)
-    t.false(data.foo)
+  on('pubsub', (state, data) => {
+    t.false(getState().foo)
+    t.true(data.foo)
   })
-  hydrate({ foo: true })()
-  emit('pubsub', { foo: false }, false)
+  hydrate({ foo: false })
+  emit('pubsub', null, { foo: true })
 })
