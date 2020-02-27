@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "microbundle build",
+    "postbuild": "npm run test",
     "watch": "microbundle watch --compress false",
     "test": "ava"
   },
