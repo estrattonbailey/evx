@@ -2,7 +2,7 @@
 Handy dandy persistent-state pub/sub with multi, wildcard, and single-property subscriptions. **400
 bytes gzipped.**
 
-## Install 
+## Install
 ```bash
 npm i evx --save
 ```
@@ -60,6 +60,16 @@ emit('foo', { value: true })
 And all subscribers are passed the full state object:
 ```javascript
 on('foo', state => console.log(state.value)) // true
+```
+
+To emit transient data that does not get merged into the global state, pass an object as the third argument to `emit`:
+```javascript
+emit('event', null, { message: 'Hello' })
+```
+
+And access via the second argument subscribers:
+```javascript
+on('event', (state, data) => console.log(data.message)) // Hello
 ```
 
 If you need to add some state but don't want to emit any events, use `hydrate`:

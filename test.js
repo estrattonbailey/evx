@@ -94,3 +94,12 @@ test('emit array of events', t => {
   on('bar', state => t.pass())
   emit([ 'foo', 'bar' ])
 })
+test('emit transient data', t => {
+  t.plan(2)
+  on('pubsub', (state, data) => {
+    t.false(getState().foo)
+    t.true(data.foo)
+  })
+  hydrate({ foo: false })
+  emit('pubsub', null, { foo: true })
+})
