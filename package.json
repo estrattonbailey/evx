@@ -1,6 +1,6 @@
 {
   "name": "evx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Handy dandy persistent-state pub/sub with multi & wildcard subscriptions.",
   "source": "index.js",
   "module": "dist/evx.es.js",
